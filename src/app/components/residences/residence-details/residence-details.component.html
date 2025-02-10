@@ -1,0 +1,8 @@
+<button routerLink="/add-residence">➕ Add Residence</button>
+<button routerLink="/update-residence/{{ residenceId }}">✏️ Update Residence</button>
+<button (click)="nextResidence()">➡️ Next</button>
+
+<h2>Détails de la résidence</h2>
+<p>🏢 ID de la résidence: {{ residenceId }}</p>
+
+<a routerLink="/residences">⬅️ Retour aux résidences</a>

@@ -1,0 +1,25 @@
+<div class="residences-container">
+  <h2>Liste des Résidences</h2>
+
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher par adresse..." />
+
+  <ul>
+    <li *ngFor="let residence of filteredResidences">
+      <img [src]="residence.image" alt="{{ residence.name }}">
+      <h3>{{ residence.name }}</h3>
+
+      <button (click)="showLocation(residence)">Show Location</button>
+
+      <p *ngIf="residence.status === 'Disponible'" class="status available">✅ Disponible</p>
+      <p *ngIf="residence.status === 'En Construction'" class="status construction">🚧 En Construction</p>
+      <p *ngIf="residence.status === 'Vendu'" class="status sold">❌ Vendu</p>
+      <a [routerLink]="['/residence', residence.id]">🔍 Voir Détails</a>
+      <a [routerLink]="['/apartments-by-residence', residence.id]">
+        <button>📃 Appartements List</button>
+      </a>
+
+
+      <button (click)="likeResidence(residence)">❤️ Like</button>
+    </li>
+  </ul>
+</div>
