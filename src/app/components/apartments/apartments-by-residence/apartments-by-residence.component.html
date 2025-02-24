@@ -1,20 +1,43 @@
-<!-- apartments-by-residence.component.html -->
-<div *ngIf="apartments.length > 0">
-    <h3>Apartments for Residence ID: {{ residenceId }}</h3>
-    <ul>
-      <li *ngFor="let apartment of apartments">
-        <p>Apartment Number: {{ apartment.apartmentNumber }}</p>
-        <p>Floor Number: {{ apartment.floorNumber }}</p>
-        <p>Surface: {{ apartment.surface }} m²</p>
-        <p>Category: {{ apartment.category }}</p>
-      </li>
-    </ul>
+<!-- Apartments Section -->
+<section id="apartments" class="apartments section">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-12">
+        <div class="section-header text-center" data-aos="fade-up" data-aos-delay="100">
+          <h1>Apartments for Residence ID: {{ residenceId }}</h1>
+          <p class="mb-0">Discover the available apartments and their details below. The following list includes apartments based on your selected residence ID.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+        <div *ngIf="apartments.length > 0; else noData">
+
+          <h3>List of Apartments</h3>
+          <ul class="apartments-list">
+            <li *ngFor="let apartment of apartments" class="apartment-item">
+              <div class="apartment-details">
+                <p><strong>Apartment Number:</strong> {{ apartment.apartmentNumber }}</p>
+                <p><strong>Floor Number:</strong> {{ apartment.floorNumber }}</p>
+                <p><strong>Surface:</strong> {{ apartment.surface }} m²</p>
+                <p><strong>Category:</strong> {{ apartment.category }}</p>
+              </div>
+            </li>
+          </ul>
+          
+        </div>
+        <ng-template #noData>
+          <p>No apartments available for this residence.</p>
+        </ng-template>
+      </div>
+
+      <!-- Button to add a new apartment -->
+      <div class="col-lg-12 text-center mt-4">
+        <button routerLink="/add-apartment" class="btn btn-primary">➕ Add Apartment</button>
+      </div>
+
+    </div>
+
   </div>
-  
-  <div *ngIf="apartments.length === 0">
-    <p>No apartments available for this residence.</p>
-  </div>
-  
-  <!-- Button to add new apartment -->
-  <button routerLink="/add-apartment">➕ Ajouter Appartement</button>
-  
+</section><!-- End Apartments Section -->

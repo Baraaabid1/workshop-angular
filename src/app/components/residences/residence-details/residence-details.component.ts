@@ -4,7 +4,6 @@ import { ResidenceService } from 'src/app/core/Services/residence.service';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-residence-details',
   templateUrl: './residence-details.component.html',
@@ -13,64 +12,58 @@ import { Validators } from '@angular/forms';
 export class ResidenceDetailsComponent implements OnInit {
   residenceForm: FormGroup;
   residenceId!: number;
-  residence: any;
+  residenceList: any[] = []; // List of all residences
 
   constructor(
     private route: ActivatedRoute,  
     private router: Router,
     private residenceService: ResidenceService,
     private fb: FormBuilder
-  ) { // Initialize form with empty/default values
+  ) {
     this.residenceForm = this.fb.group({
-      id: [{ value: '', disabled: true }], // ID should be readonly
+      id: [{ value: '', disabled: true }],
       name: ['', Validators.required],
       address: ['', Validators.required],
       image: ['', [Validators.required, Validators.pattern('https?://.+')]],
       status: ['Disponible', Validators.required],
-      apartments: this.fb.array([]) // Empty list initially
-    });}
+      apartments: this.fb.array([])
+    });
+  }
 
   ngOnInit() {
-    this.residenceId = Number(this.route.snapshot.params['id']);
-
-    // Initialize form with all necessary fields
-    this.residenceForm = this.fb.group({
-      id: [{ value: '', disabled: true }], // ID should not be editable
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      image: ['', [Validators.required, Validators.pattern('https?://.+')]],
-      status: ['Disponible', Validators.required],
-      apartments: this.fb.array([]) // Dynamic list of apartments
-    });
-
-    // Fetch residence details and populate the form
-    this.residenceService.getResidenceById(this.residenceId).subscribe({
+    this.residenceId = +this.route.snapshot.params['id']; // Convert ID to a number
+  
+    // Fetch all residences before doing anything
+    this.residenceService.getResidences().subscribe({
       next: (data) => {
-        this.residenceForm.patchValue({
-          id: data.id,
-          name: data.name,
-          address: data.address,
-          image: data.image,
-          status: data.status
-        });
-
-        // Populate apartments array
-        this.setApartments(data.apartments || []);
-
-        this.residenceForm.updateValueAndValidity(); // Update form state
+        this.residenceList = data; // Store the list of residences
+        this.loadResidence(this.residenceId); // Load current residence based on ID
       },
       error: (err) => {
-        console.error("Error fetching residence:", err);
+        console.error("Error fetching residences:", err);
       }
     });
   }
 
-  // Getter for apartments FormArray
+  loadResidence(id: number) {
+    // Fetch the residence by ID
+    const residence = this.residenceList.find(res => res.id == id);
+    if (residence) {
+      this.residenceForm.patchValue({
+        id: residence.id,
+        name: residence.name,
+        address: residence.address,
+        image: residence.image,
+        status: residence.status
+      });
+      this.setApartments(residence.apartments || []);
+    }
+  }
+
   get apartments(): FormArray {
     return this.residenceForm.get('apartments') as FormArray;
   }
 
-  // Populate apartments
   setApartments(apartments: any[]) {
     this.apartments.clear();
     apartments.forEach(apartment => {
@@ -87,15 +80,13 @@ export class ResidenceDetailsComponent implements OnInit {
 
   updateResidence() {
     if (this.residenceForm.valid) {
-      // Prepare updated data (enable ID field temporarily)
       const updatedResidence = {
         ...this.residenceForm.getRawValue(),
-        id: this.residenceId // Ensure ID is included
+        id: this.residenceId
       };
-
       this.residenceService.updateResidence(this.residenceId, updatedResidence).subscribe({
         next: () => {
-          this.router.navigate(['/residences']); 
+          this.router.navigate(['/residences']);
         },
         error: (err) => {
           console.error("Error updating residence:", err);
@@ -103,9 +94,14 @@ export class ResidenceDetailsComponent implements OnInit {
       });
     }
   }
-
   nextResidence() {
-    this.residenceId++;
-    this.router.navigate(['/residence', this.residenceId]); 
+    const currentIndex = this.residenceList.findIndex(res => res.id === this.residenceId);
+    if (currentIndex >= 0 && currentIndex < this.residenceList.length - 1) {
+      const nextResidence = this.residenceList[currentIndex + 1];
+      this.router.navigate(['/residence', nextResidence.id]); // Navigate to next residence
+    } else {
+      console.log('No next residence available.');
+    }
   }
+  
 }

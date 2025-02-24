@@ -1,15 +1,37 @@
-<p>apartments works!</p>
-<p>Nombre d'appartements avec une surface de 50m²: {{ similarApartmentsCount }}</p>
-<div *ngIf="listApartments.length > 0; else noData">
-    <h3>List of Apartments</h3>
-    <ul>
-      <li *ngFor="let apartment of listApartments">
-        Apartment Number: {{ apartment.apartNum }} - Floor: {{ apartment.floorNum }} - Surface: {{ apartment.surface }}m²
-      </li>
-    </ul>
-    <p>Number of apartments with surface 50m²: {{ similarApartmentsCount }}</p>
+<!-- Apartments Section -->
+<section id="apartments" class="apartments section">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-12">
+        <div class="section-header text-center" data-aos="fade-up" data-aos-delay="100">
+          <h1>Apartments</h1>
+          <p class="mb-0">Discover the available apartments and their details below. The following list includes apartments with a surface area of 50m² and more.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+        <div *ngIf="listApartments.length > 0; else noData">
+
+          <h3>List of Apartments</h3>
+          <ul class="apartments-list">
+            <li *ngFor="let apartment of listApartments" class="apartment-item">
+              <div class="apartment-details">
+                <p><strong>Apartment Number:</strong> {{ apartment.apartNum }}</p>
+                <p><strong>Floor:</strong> {{ apartment.floorNum }}</p>
+                <p><strong>Surface:</strong> {{ apartment.surface }} m²</p>
+              </div>
+            </li>
+          </ul>
+          <p><strong>Number of apartments with surface 50m²:</strong> {{ similarApartmentsCount }}</p>
+          
+        </div>
+        <ng-template #noData>
+          <p>No apartments available.</p>
+        </ng-template>
+      </div>
+
+    </div>
   </div>
-  
-  <ng-template #noData>
-    <p>No apartments available.</p>
-  </ng-template>
+</section><!-- End Apartments Section -->

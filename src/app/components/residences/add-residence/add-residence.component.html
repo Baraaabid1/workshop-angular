@@ -1,87 +1,144 @@
-<form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
-  <!-- Hidden ID -->
-  <input type="hidden" formControlName="id" />
+<section id="residence" class="residence section">
 
-  <!-- Residence Name -->
-  <div class="form-group">
-    <label>Residence Name:</label>
-    <input type="text" formControlName="name" />
-    <small *ngIf="residenceForm.get('name')?.invalid && residenceForm.get('name')?.touched">
-      Minimum 3 characters required
-    </small>
-  </div>
-
-  <!-- Address -->
-  <div class="form-group">
-    <label>Address:</label>
-    <input type="text" formControlName="address" />
-    <small *ngIf="residenceForm.get('address')?.invalid && residenceForm.get('address')?.touched">
-      Address is required
-    </small>
-  </div>
-
-  <!-- Image URL -->
-  <div class="form-group">
-    <label>Image URL:</label>
-    <input type="text" formControlName="image" />
-    <small *ngIf="residenceForm.get('image')?.invalid && residenceForm.get('image')?.touched">
-      Enter a valid URL
-    </small>
-  </div>
-
-  <!-- Status Dropdown -->
-  <div class="form-group">
-    <label>Status:</label>
-    <select formControlName="status">
-      <option value="Disponible">Disponible</option>
-      <option value="En Construction">En Construction</option>
-      <option value="Vendu">Vendu</option>
-    </select>
-  </div>
-
-  <!-- Apartments -->
-  <div formArrayName="apartments">
-    <h3> Apartments </h3>
-    <div *ngFor="let apartment of apartments.controls; let i = index" [formGroupName]="i">
-      <div class="form-group">
-        <label>Apartment Number:</label>
-        <input type="text" formControlName="apartmentNumber" />
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-4">
+      
+      <div class="col-lg-4">
+        <!-- Address Info -->
+        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+          <i class="bi bi-geo-alt flex-shrink-0"></i>
+          <div>
+            <h3>Address</h3>
+            <p>{{ residenceForm.get('address')?.value }}</p>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Floor Number:</label>
-        <input type="text" formControlName="floorNumber" />
-      </div>
+      <div class="col-lg-8">
+        <!-- Form Section -->
+        <form [formGroup]="residenceForm" (ngSubmit)="onSubmit()" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
 
-      <div class="form-group">
-        <label>Surface (m²):</label>
-        <input type="text" formControlName="surface" />
-      </div>
+          <div class="row gy-4">
+            <!-- Residence Name -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Residence Name:</label>
+                <input type="text" formControlName="name" id="name" class="form-control" placeholder="Enter Residence Name" />
+                <small *ngIf="residenceForm.get('name')?.invalid && residenceForm.get('name')?.touched">
+                  Minimum 3 characters required
+                </small>
+              </div>
+            </div>
 
-      <div class="form-group">
-        <label>Terrace:</label>
-        <input type="checkbox" formControlName="terrace" />
-      </div>
+            <!-- Address -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" formControlName="address" id="address" class="form-control" placeholder="Enter Address" />
+                <small *ngIf="residenceForm.get('address')?.invalid && residenceForm.get('address')?.touched">
+                  Address is required
+                </small>
+              </div>
+            </div>
 
-      <div class="form-group">
-        <label>Surface Terrace (m²):</label>
-        <input type="text" formControlName="surfaceTerrace" />
-      </div>
+            <!-- Image URL -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="image">Image URL:</label>
+                <input type="text" formControlName="image" id="image" class="form-control" placeholder="Enter Image URL" />
+                <small *ngIf="residenceForm.get('image')?.invalid && residenceForm.get('image')?.touched">
+                  Enter a valid URL
+                </small>
+              </div>
+            </div>
 
-      <div class="form-group">
-        <label>Category:</label>
-        <select formControlName="category">
-          <option value="S+1">S+1</option>
-          <option value="S+2">S+2</option>
-          <option value="S+3">S+3</option>
-        </select>
-      </div>
+            <!-- Status Dropdown -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="status">Status:</label>
+                <select formControlName="status" id="status" class="form-control">
+                  <option value="Disponible">Disponible</option>
+                  <option value="En Construction">En Construction</option>
+                  <option value="Vendu">Vendu</option>
+                </select>
+              </div>
+            </div>
 
-      <button type="button" (click)="removeApartment(i)">Remove</button>
+            <!-- Apartments -->
+            <div class="col-md-12">
+              <div formArrayName="apartments">
+                <h3>Apartments</h3>
+                <div *ngFor="let apartment of apartments.controls; let i = index" [formGroupName]="i">
+                  <div class="row gy-4">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="apartmentNumber">Apartment Number:</label>
+                        <input type="text" formControlName="apartmentNumber" id="apartmentNumber" class="form-control" placeholder="Apartment Number" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="floorNumber">Floor Number:</label>
+                        <input type="text" formControlName="floorNumber" id="floorNumber" class="form-control" placeholder="Floor Number" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="surface">Surface (m²):</label>
+                        <input type="text" formControlName="surface" id="surface" class="form-control" placeholder="Surface (m²)" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="terrace">Terrace:</label>
+                        <input type="checkbox" formControlName="terrace" id="terrace" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="surfaceTerrace">Surface Terrace (m²):</label>
+                        <input type="text" formControlName="surfaceTerrace" id="surfaceTerrace" class="form-control" placeholder="Terrace Surface" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select formControlName="category" id="category" class="form-control">
+                          <option value="S+1">S+1</option>
+                          <option value="S+2">S+2</option>
+                          <option value="S+3">S+3</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-danger" (click)="removeApartment(i)">Remove Apartment</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <button type="button" class="btn btn-primary" (click)="addApartment()">Add Apartment</button>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <div class="loading">Loading...</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+
+              <button type="submit" class="btn btn-success" [disabled]="residenceForm.invalid">Submit</button>
+            </div>
+
+          </div>
+        </form>
+      </div><!-- End Contact Form -->
+
     </div>
   </div>
 
-  <button type="button" (click)="addApartment()">Add Apartment</button>
-
-  <button type="submit" [disabled]="residenceForm.invalid">Submit</button>
-</form>
+</section>
