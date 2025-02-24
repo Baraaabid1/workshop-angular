@@ -1,1 +1,75 @@
-<p>add-apartment works!</p>
+<form [formGroup]="apartmentForm" class="apartment-form">
+  <!-- Apartment Number -->
+  <div class="form-group">
+    <label>Apartment Number:</label>
+    <input type="text" formControlName="apartmentNumber" />
+    <div class="error" *ngIf="apartmentForm.get('apartmentNumber')?.invalid && apartmentForm.get('apartmentNumber')?.touched">
+      <small *ngIf="apartmentForm.get('apartmentNumber')?.hasError('required')">Required</small>
+      <small *ngIf="apartmentForm.get('apartmentNumber')?.hasError('pattern')">Only numbers allowed</small>
+    </div>
+  </div>
+
+  <!-- Floor Number -->
+  <div class="form-group">
+    <label>Floor Number:</label>
+    <input type="text" formControlName="floorNumber" />
+    <div class="error" *ngIf="apartmentForm.get('floorNumber')?.invalid && apartmentForm.get('floorNumber')?.touched">
+      <small *ngIf="apartmentForm.get('floorNumber')?.hasError('required')">Required</small>
+      <small *ngIf="apartmentForm.get('floorNumber')?.hasError('pattern')">Only numbers allowed</small>
+    </div>
+  </div>
+
+  <!-- Surface -->
+  <div class="form-group">
+    <label>Surface (m²):</label>
+    <input type="text" formControlName="surface" />
+    <div class="error" *ngIf="apartmentForm.get('surface')?.invalid && apartmentForm.get('surface')?.touched">
+      <small *ngIf="apartmentForm.get('surface')?.hasError('required')">Required</small>
+      <small *ngIf="apartmentForm.get('surface')?.hasError('min')">Must be greater than 0</small>
+    </div>
+  </div>
+
+  <!-- Terrace -->
+  <div class="form-group">
+    <label>Terrace:</label>
+    <div class="radio-group">
+      <label><input type="radio" formControlName="terrace" value="yes" /> Yes</label>
+      <label><input type="radio" formControlName="terrace" value="no" /> No</label>
+    </div>
+  </div>
+
+  <!-- Surface Terrace -->
+  <div class="form-group">
+    <label>Surface Terrace (m²):</label>
+    <input type="text" formControlName="surfaceTerrace" />
+    <div class="error" *ngIf="apartmentForm.get('surfaceTerrace')?.invalid && apartmentForm.get('surfaceTerrace')?.touched">
+      <small *ngIf="apartmentForm.get('surfaceTerrace')?.hasError('required')">Required when terrace is Yes</small>
+      <small *ngIf="apartmentForm.get('surfaceTerrace')?.hasError('min')">Must be greater than 0</small>
+    </div>
+  </div>
+
+  <!-- Category -->
+  <div class="form-group">
+    <label>Category:</label>
+    <div class="radio-group">
+      <label><input type="radio" formControlName="category" value="S+1" /> S+1</label>
+      <label><input type="radio" formControlName="category" value="S+2" /> S+2</label>
+      <label><input type="radio" formControlName="category" value="S+3" /> S+3</label>
+    </div>
+  </div>
+
+  <!-- Residence ID -->
+  <div class="form-group">
+    <label>Residence ID:</label>
+    <input type="text" formControlName="residenceId" />
+    <div class="error" *ngIf="apartmentForm.get('residenceId')?.invalid && apartmentForm.get('residenceId')?.touched">
+      <small *ngIf="apartmentForm.get('residenceId')?.hasError('required')">Required</small>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="form-actions">
+    <button (click)="addApartment()" [disabled]="apartmentForm.invalid">Add</button>
+    <button type="reset" (click)="apartmentForm.reset()">Reset</button>
+  </div>
+</form>

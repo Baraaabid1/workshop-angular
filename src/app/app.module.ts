@@ -15,6 +15,10 @@ import { AddResidenceComponent } from './components/residences/add-residence/add
 import { ApartmentsComponent } from './components/apartments/apartments.component';
 import { ApartmentsByResidenceComponent } from './components/apartments/apartments-by-residence/apartments-by-residence.component';
 import { AddApartmentComponent } from './components/apartments/add-apartment/add-apartment.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 const routes: Routes = [
@@ -41,13 +45,18 @@ const routes: Routes = [
     AddResidenceComponent,
     ApartmentsComponent,
     ApartmentsByResidenceComponent,
-    AddApartmentComponent
+    AddApartmentComponent,
+    
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes) 
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes) ,
+    HttpClientModule
 
   ],
   providers: [],

@@ -1,1 +1,20 @@
-<button routerLink="/add-apartment">➕ Ajouter Appartement</button>
+<!-- apartments-by-residence.component.html -->
+<div *ngIf="apartments.length > 0">
+    <h3>Apartments for Residence ID: {{ residenceId }}</h3>
+    <ul>
+      <li *ngFor="let apartment of apartments">
+        <p>Apartment Number: {{ apartment.apartmentNumber }}</p>
+        <p>Floor Number: {{ apartment.floorNumber }}</p>
+        <p>Surface: {{ apartment.surface }} m²</p>
+        <p>Category: {{ apartment.category }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="apartments.length === 0">
+    <p>No apartments available for this residence.</p>
+  </div>
+  
+  <!-- Button to add new apartment -->
+  <button routerLink="/add-apartment">➕ Ajouter Appartement</button>
+  

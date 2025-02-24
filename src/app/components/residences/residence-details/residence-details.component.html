@@ -4,5 +4,14 @@
 
 <h2>Détails de la résidence</h2>
 <p>🏢 ID de la résidence: {{ residenceId }}</p>
+<form [formGroup]="residenceForm" (ngSubmit)="updateResidence()">
+    <label>Name:</label>
+    <input type="text" formControlName="name">
+  
+    <label>Location:</label>
+    <input type="text" formControlName="location">
+  
+    <button type="submit">Update Residence</button>
+  </form>
 
 <a routerLink="/residences">⬅️ Retour aux résidences</a>

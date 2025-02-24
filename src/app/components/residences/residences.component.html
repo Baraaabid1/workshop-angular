@@ -1,5 +1,7 @@
 <div class="residences-container">
   <h2>Liste des Résidences</h2>
+  <p>Nombre de résidences similaires à Rades: {{ similarResidencesCount }}</p>
+
 
   <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher par adresse..." />
 
@@ -19,7 +21,11 @@
       </a>
 
 
+
       <button (click)="likeResidence(residence)">❤️ Like</button>
+
+        <button (click)="deleteResidence(residence.id)">Supprimer</button>
+
     </li>
   </ul>
 </div>

@@ -1,1 +1,87 @@
-<p>add-residence works!</p>
+<form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
+  <!-- Hidden ID -->
+  <input type="hidden" formControlName="id" />
+
+  <!-- Residence Name -->
+  <div class="form-group">
+    <label>Residence Name:</label>
+    <input type="text" formControlName="name" />
+    <small *ngIf="residenceForm.get('name')?.invalid && residenceForm.get('name')?.touched">
+      Minimum 3 characters required
+    </small>
+  </div>
+
+  <!-- Address -->
+  <div class="form-group">
+    <label>Address:</label>
+    <input type="text" formControlName="address" />
+    <small *ngIf="residenceForm.get('address')?.invalid && residenceForm.get('address')?.touched">
+      Address is required
+    </small>
+  </div>
+
+  <!-- Image URL -->
+  <div class="form-group">
+    <label>Image URL:</label>
+    <input type="text" formControlName="image" />
+    <small *ngIf="residenceForm.get('image')?.invalid && residenceForm.get('image')?.touched">
+      Enter a valid URL
+    </small>
+  </div>
+
+  <!-- Status Dropdown -->
+  <div class="form-group">
+    <label>Status:</label>
+    <select formControlName="status">
+      <option value="Disponible">Disponible</option>
+      <option value="En Construction">En Construction</option>
+      <option value="Vendu">Vendu</option>
+    </select>
+  </div>
+
+  <!-- Apartments -->
+  <div formArrayName="apartments">
+    <h3> Apartments </h3>
+    <div *ngFor="let apartment of apartments.controls; let i = index" [formGroupName]="i">
+      <div class="form-group">
+        <label>Apartment Number:</label>
+        <input type="text" formControlName="apartmentNumber" />
+      </div>
+
+      <div class="form-group">
+        <label>Floor Number:</label>
+        <input type="text" formControlName="floorNumber" />
+      </div>
+
+      <div class="form-group">
+        <label>Surface (m²):</label>
+        <input type="text" formControlName="surface" />
+      </div>
+
+      <div class="form-group">
+        <label>Terrace:</label>
+        <input type="checkbox" formControlName="terrace" />
+      </div>
+
+      <div class="form-group">
+        <label>Surface Terrace (m²):</label>
+        <input type="text" formControlName="surfaceTerrace" />
+      </div>
+
+      <div class="form-group">
+        <label>Category:</label>
+        <select formControlName="category">
+          <option value="S+1">S+1</option>
+          <option value="S+2">S+2</option>
+          <option value="S+3">S+3</option>
+        </select>
+      </div>
+
+      <button type="button" (click)="removeApartment(i)">Remove</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addApartment()">Add Apartment</button>
+
+  <button type="submit" [disabled]="residenceForm.invalid">Submit</button>
+</form>

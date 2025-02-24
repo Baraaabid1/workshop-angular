@@ -1,0 +1,109 @@
+{
+  "residences": [
+    {
+      "id": "2",
+      "name": "El Yasmine",
+      "address": "Ezzahra",
+      "image": "../../assets/images/R2.jpg",
+      "status": "Disponible"
+    },
+    {
+      "id": "",
+      "name": "test",
+      "address": "aaaa",
+      "image": "https://edifia-immobilier.com/images/facade-verdia-1.jpg",
+      "status": "Disponible",
+      "apartments": [
+        {
+          "apartmentNumber": "21",
+          "floorNumber": "1",
+          "surface": "300",
+          "terrace": false,
+          "category": "S+2"
+        }
+      ]
+    }
+  ],
+  "apartments": [
+    {
+      "apartNum": 101,
+      "floorNum": 1,
+      "surface": 120,
+      "terrace": true,
+      "surfaceterrace": 10,
+      "category": "T3",
+      "ResidenceId": 1,
+      "id": "686e"
+    },
+    {
+      "apartNum": 102,
+      "floorNum": 1,
+      "surface": 95,
+      "terrace": false,
+      "surfaceterrace": 0,
+      "category": "T2",
+      "ResidenceId": 1,
+      "id": "694f"
+    },
+    {
+      "apartNum": 201,
+      "floorNum": 2,
+      "surface": 140,
+      "terrace": true,
+      "surfaceterrace": 15,
+      "category": "T4",
+      "ResidenceId": 2,
+      "id": "1bf4"
+    },
+    {
+      "apartNum": 202,
+      "floorNum": 2,
+      "surface": 110,
+      "terrace": false,
+      "surfaceterrace": 0,
+      "category": "T3",
+      "ResidenceId": 2,
+      "id": "f01d"
+    },
+    {
+      "apartNum": 301,
+      "floorNum": 3,
+      "surface": 160,
+      "terrace": true,
+      "surfaceterrace": 20,
+      "category": "T5",
+      "ResidenceId": 3,
+      "id": "918f"
+    },
+    {
+      "apartNum": 302,
+      "floorNum": 3,
+      "surface": 125,
+      "terrace": false,
+      "surfaceterrace": 0,
+      "category": "T3",
+      "ResidenceId": 3,
+      "id": "1d70"
+    },
+    {
+      "apartNum": 401,
+      "floorNum": 4,
+      "surface": 135,
+      "terrace": true,
+      "surfaceterrace": 12,
+      "category": "T4",
+      "ResidenceId": 4,
+      "id": "b0d7"
+    },
+    {
+      "apartNum": 402,
+      "floorNum": 4,
+      "surface": 100,
+      "terrace": false,
+      "surfaceterrace": 0,
+      "category": "T2",
+      "ResidenceId": 4,
+      "id": "ee31"
+    }
+  ]
+}

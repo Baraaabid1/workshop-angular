@@ -1,1 +1,15 @@
 <p>apartments works!</p>
+<p>Nombre d'appartements avec une surface de 50m²: {{ similarApartmentsCount }}</p>
+<div *ngIf="listApartments.length > 0; else noData">
+    <h3>List of Apartments</h3>
+    <ul>
+      <li *ngFor="let apartment of listApartments">
+        Apartment Number: {{ apartment.apartNum }} - Floor: {{ apartment.floorNum }} - Surface: {{ apartment.surface }}m²
+      </li>
+    </ul>
+    <p>Number of apartments with surface 50m²: {{ similarApartmentsCount }}</p>
+  </div>
+  
+  <ng-template #noData>
+    <p>No apartments available.</p>
+  </ng-template>
