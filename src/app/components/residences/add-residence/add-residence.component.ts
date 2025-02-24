@@ -57,8 +57,15 @@ removeApartment(index: number) {
 
 onSubmit() {
   if (this.residenceForm.valid) {
-    console.log("Form Submitted:", this.residenceForm.value);
-    this.residenceService.addResidence(this.residenceForm.value).subscribe(() => {
+    let formData = this.residenceForm.value;
+
+    // Remove the ID so JSON Server can auto-generate it
+    delete formData.id;
+
+    console.log("Submitting Residence:", formData);
+
+    this.residenceService.addResidence(formData).subscribe((response) => {
+      console.log("Residence Added:", response);
       this.router.navigate(['/residences']); // Redirect to residence list
     });
   } else {

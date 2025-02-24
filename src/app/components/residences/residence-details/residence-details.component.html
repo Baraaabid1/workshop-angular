@@ -1,17 +1,60 @@
 <button routerLink="/add-residence">➕ Add Residence</button>
-<button routerLink="/update-residence/{{ residenceId }}">✏️ Update Residence</button>
 <button (click)="nextResidence()">➡️ Next</button>
 
 <h2>Détails de la résidence</h2>
-<p>🏢 ID de la résidence: {{ residenceId }}</p>
+<p>🏢 <strong>ID de la résidence:</strong> {{ residenceId }}</p>
+
 <form [formGroup]="residenceForm" (ngSubmit)="updateResidence()">
-    <label>Name:</label>
-    <input type="text" formControlName="name">
-  
-    <label>Location:</label>
-    <input type="text" formControlName="location">
-  
-    <button type="submit">Update Residence</button>
-  </form>
+  <div>
+    <label for="name">🏠 Name:</label>
+    <input id="name" type="text" formControlName="name" required>
+  </div>
+
+  <div>
+    <label for="address">📍 Address:</label>
+    <input id="address" type="text" formControlName="address" required>
+  </div>
+
+  <div>
+    <label for="image">🖼️ Image URL:</label>
+    <input id="image" type="text" formControlName="image" required>
+  </div>
+
+  <div>
+    <label for="status">📌 Status:</label>
+    <select id="status" formControlName="status">
+      <option value="Disponible">Disponible</option>
+      <option value="Indisponible">Indisponible</option>
+    </select>
+  </div>
+
+  <h3>🏢 Apartments</h3>
+  <div formArrayName="apartments">
+    <div *ngFor="let apartment of apartments.controls; let i = index" [formGroupName]="i">
+      <label>Apartment Number:</label>
+      <input type="text" formControlName="apartmentNumber" required>
+
+      <label>Floor Number:</label>
+      <input type="text" formControlName="floorNumber" required>
+
+      <label>Surface:</label>
+      <input type="text" formControlName="surface" required>
+
+      <label>Terrace:</label>
+      <input type="checkbox" formControlName="terrace">
+
+      <label>Surface Terrace:</label>
+      <input type="text" formControlName="surfaceTerrace">
+
+      <label>Category:</label>
+      <select formControlName="category">
+        <option value="S+1">S+1</option>
+        <option value="S+2">S+2</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="residenceForm.invalid">✅ Update Residence</button>
+</form>
 
 <a routerLink="/residences">⬅️ Retour aux résidences</a>

@@ -2,13 +2,14 @@
   "residences": [
     {
       "id": "2",
-      "name": "El Yasmine",
+      "name": "El Yasmine 2",
       "address": "Ezzahra",
-      "image": "../../assets/images/R2.jpg",
-      "status": "Disponible"
+      "image": "https://www.immobilierebenhassine.tn/wp-content/uploads/2021/09/VENEZIA02.png",
+      "status": "Disponible",
+      "apartments": []
     },
     {
-      "id": "",
+      "id": "3",
       "name": "test",
       "address": "aaaa",
       "image": "https://edifia-immobilier.com/images/facade-verdia-1.jpg",
@@ -22,6 +23,14 @@
           "category": "S+2"
         }
       ]
+    },
+    {
+      "id": "4",
+      "name": "test 2",
+      "address": "aaaa",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxQnDOLXmYaJbE8MXje6C81FHB7pFUs0yahA&s",
+      "status": "Disponible",
+      "apartments": []
     }
   ],
   "apartments": [
